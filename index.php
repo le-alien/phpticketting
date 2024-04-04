@@ -21,12 +21,12 @@ include "header.php";
         <h2>Login</h2>
         <form method="post" action="login.php">
             <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
+                <label for="brukernavn">Username</label>
+                <input type="text" id="brukernavn" name="brukernavn" required>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
+                <label for="passord">Password</label>
+                <input type="password" id="passord" name="passord" required>
             </div>
             <div class="form-group">
                 <button type="submit">Login</button>

@@ -39,7 +39,7 @@
                 <!-- <div class="knapp"><button></button></div> -->
 
                 <!-- En divisjon med klassen "knapp" som inneholder en lenke (a) til "loginpage.php" -->
-                <div class="knapp"><a href="loginpage.php">Log Inn</a></div>
+                <div class="knapp"><a href="index.php">Log Inn</a></div>
             </li>
         </ul>
     </div>

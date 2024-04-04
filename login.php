@@ -8,6 +8,8 @@ include "connection.php";
 // Sjekker om 'brukernavn' og 'passord' er satt i POST-forespørselen
 if(isset($_POST['brukernavn']) && isset($_POST['passord'])) {
 
+
+}
     // Funksjon for validering av inndata for å forhindre SQL-injeksjoner og lignende
     function validate($data) {
         $data = trim($data);
@@ -15,11 +17,9 @@ if(isset($_POST['brukernavn']) && isset($_POST['passord'])) {
         $data = htmlspecialchars($data);
         return $data;
     }
-}
-
 // Validerer 'brukernavn' og 'passord' fra POST-forespørselen
 $brukernavn = validate($_POST['brukernavn']);
-$passord = validate($_POST['zpassord']);
+$passord = validate($_POST['passord']);
 
 // Sjekker om 'brukernavn' er tomt, omdirigerer med feilmelding hvis det er tilfelle
 if(empty($brukernavn)) {
@@ -33,7 +33,7 @@ else if(empty($passord)) {
 }
 
 // SQL-spørring for å hente brukeren med matchende 'brukernavn' og 'passord'
-$sql = "SELECT * FROM bruker WHERE brukernavn='$brukernavn' AND passord='$passord'";
+$sql = "SELECT * FROM bruker WHERE brukernavn='$brukernavn' AND brukerpassord='$passord'";
 
 // Utfører SQL-spørringen
 $result = mysqli_query($conn, $sql);
@@ -44,7 +44,7 @@ if(mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_assoc($result);
 
     // Sjekker om 'brukernavn' og 'passord' fra skjemaet matcher dataene fra databasen
-    if($row['brukernavn'] == $brukernavn && $row['passord'] == $passord) {
+    if($row['brukernavn'] == $brukernavn && $row['brukerpassord'] == $passord) {
         // Melding som indikerer vellykket innlogging
         echo "Innlogget";
 
@@ -53,9 +53,9 @@ if(mysqli_num_rows($result) > 0) {
         $_SESSION['id'] = $row['idbruker'];
 
         // Omdirigerer til hjemmesiden (home.php) etter vellykket innlogging
-        header("Location: home.php");
+        header("Location: klage.php");
         exit();
-    }
+    }                                             
     else {
         // Omdirigerer med feilmelding hvis brukernavn eller passord ikke matcher
         header("Location: index.php?error=Ugyldig brukernavn eller passord!");
